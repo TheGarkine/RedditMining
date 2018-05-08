@@ -38,7 +38,6 @@ class RedditSpider(scrapy.Spider):
 	start_urls = [
 		"https://www.reddit.com/r/DotA2/",
 		'https://www.reddit.com/r/GlobalOffensive/',
-		#'https://www.reddit.com/r/spacex/', <- War lediglich aus interesse
 		'https://www.reddit.com/r/leagueoflegends/',
 		'https://www.reddit.com/r/darksouls3/',
 		'https://www.reddit.com/r/Witcher3/',
@@ -91,7 +90,7 @@ class RedditSpider(scrapy.Spider):
 
 	
 	#sets the depth of the spider, has to be a multiple of 25, if it is not, the next multiple of 25 is used
-	max_reddit_count = 25
+	max_reddit_count = 100
 
 	def parse(self, response):
 		"""
@@ -177,14 +176,12 @@ class RedditSpider(scrapy.Spider):
 			yield dict(name=name,
 			birthday=birthday,
 			karma = karma,
-			table_type='users',
-			profile_type="new",
-			#url=response.url
+			table_type='users'
 			)
 		else:
 			name = response.css("div.titlebox > h1::text").extract_first()
 			if( not name):
-				return
+				return #ignore this user, this can occur due to +18 rating of the user
 			birthday = response.css("span.age > time::attr(datetime)").extract_first()
 			birthday = str(datetime.strptime(birthday, '%Y-%m-%dT%H:%M:%S+00:00'))
 			karma_post = int(re.sub(r",","",response.css("span.karma::text").extract_first()))
@@ -192,7 +189,5 @@ class RedditSpider(scrapy.Spider):
 			yield dict(name=name,
 			birthday=birthday,
 			karma = karma_post + karma_comment,
-			table_type='users',
-			profile_type="old",
-			#url=response.url
+			table_type='users'
 			)

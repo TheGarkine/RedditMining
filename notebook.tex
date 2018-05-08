@@ -1,0 +1,1022 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Mining}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Reddit-Mining}\label{reddit-mining}
+
+\subsection{Die Ziele im Projekt}\label{die-ziele-im-projekt}
+
+Allgemein ist die Aufgabe Texte systematisch aus dem Web zu gewinnen und
+diese dann auszuwerten.
+
+Wir haben uns zur Aufgabe gemacht durch diverse Reddit-Spiele-Foren
+(https://reddit.com) zu crawlen und verschiedene Aussagen über die
+Nutzer und die Spiele der einzelnen Foren zu machen: - Wie freundlich
+sind die Spieler der einzelnen Foren? - In welchen Spielen wird am
+meisten im Web diskutiert? - Welche Spieler sind die Freundlichsten,
+welche Kriterien nehmen den meisten Einfluss?
+
+Zusätzlich ist es das Ziel, einen beliebigen Text zu einem der Spiele
+zuzuordnen.
+
+Zur Datenspeicherung wird nach Aufgabe eine SQL-Lite Datenbank
+verwendet.
+
+Wichtig für uns ist Modularität, sodass wir schnell weitere Reddit-Foren
+hinzufügen können und nach anderen Kriterien suchen können.
+
+    \section{Scraping}\label{scraping}
+
+Dieser Abschnitt behandelt das Scraping der einzelnen Reddit Pages
+(Subreddits).
+
+Der Spider benutzt folgende Foren:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{start\PYZus{}urls} \PY{o}{=} \PY{p}{[}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://www.reddit.com/r/DotA2/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/GlobalOffensive/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/leagueoflegends/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/darksouls3/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Witcher3/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Smite/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/aoe4/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/unrealtournament/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/battlefield\PYZus{}one/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/FIFA/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/WorldofTanks/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/FortNiteBR/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/PUBATTLEGROUNDS/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/starcraft/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/RocketLeague/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/CallOfDuty/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/tf2/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/skyrim/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/wow/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Guildwars2/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/silenthill/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/civ/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/StreetFighter/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/smashbros/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Mario/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Breath\PYZus{}of\PYZus{}the\PYZus{}Wild/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/farcry/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/pokemon/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Tetris/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/heroesofthestorm/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Tekken/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/assassinscreed/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/mariokart/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/granturismo/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/forza/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/HeroesofNewerth/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Minecraft/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/hearthstone/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Terraria/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/halo/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/GodofWar/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Kirby/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/gtaonline/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://www.reddit.com/r/Wolfenstein/}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{]}
+\end{Verbatim}
+
+
+    Für die folgenden Beispiele wird die scrapy basierte Funktion aus Blatt
+5 verwendet:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{scrapy}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{c+c1}{\PYZsh{}copy of sheet 05}
+        \PY{k}{def} \PY{n+nf}{gen\PYZus{}scrapy\PYZus{}response}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} define user agent to simulate interactive user}
+            \PY{n}{user\PYZus{}agent} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{req} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{p}{\PYZob{}} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{user\PYZhy{}agent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{user\PYZus{}agent} \PY{p}{\PYZcb{}}\PY{p}{)}
+            \PY{k}{return} \PY{n}{scrapy}\PY{o}{.}\PY{n}{http}\PY{o}{.}\PY{n}{TextResponse}\PY{p}{(}\PY{n}{req}\PY{o}{.}\PY{n}{url}\PY{p}{,} \PY{n}{body}\PY{o}{=}\PY{n}{req}\PY{o}{.}\PY{n}{text}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Reddit selbst zählt offenbar nur auf dem Frontend seine eigenen
+Forenbeiträge (Threads) durch. dies geschieht über einen HTTP-GET
+Paramemter "count".
+
+Diesen kann man somit benutzen um die Tiefe des Spiders in abhängigkeit
+zur Aktuellen gescrapten Website zu bestimmen. Per default werden immer
+25 Threads pro Page angegeben.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{n}{response} \PY{o}{=} \PY{n}{gen\PYZus{}scrapy\PYZus{}response}\PY{p}{(}\PY{n}{start\PYZus{}urls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}sets the depth of the spider, has to be a multiple of 25, if it is not, the next multiple of 25 is used}
+        \PY{n}{max\PYZus{}reddit\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{25}
+\end{Verbatim}
+
+
+    In der Analyse ist uns aufgefallen, dass alle Reddit-Foren zwar
+unterschiedliche Designs haben, aber immer die selbe Struktur (in Bezug
+auf den HTML-Baum und die CSS-Klassen) besitzen. Aus diesem Grund können
+wir das selbe vorgehen auf alle Foren anwenden.
+
+Es gibt drei parse-funktionen: - parse: Die Hauptseiten nach Threads
+parsen, und den "next"-Button finden, um theorethisch durch das gesamte
+subreddit zu crawlen (reddit zeigt benutzern aber nur die letzten 1.000
+Threads eines Subreddits, alle vorherigen sind anscheinend archiviert
+und auf normalem weg unzugänglich) - parse\_comments: Geht durch einene
+einzelnen Thread und erfasst alle Kommentare mit: - Erfasser -
+Comment-Karma (abhängig von der Resonanz der User zu diesem Kommentar) -
+Inhalt - Thread - Spiel - parse\_user: Die "Homepage" eines einzelnen
+user parsen um Informationen über: - Name - Reddit-Geburtstag
+(Registrierungsdatum) - Karma (Die Summe über das gesamte Karma aller
+Kommentare/Posts)
+
+Im Folgenden wird die grobe Struktur dieser drei Funktionen gezeigt:
+
+    \subsubsection{parse}\label{parse}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}Find count value to termiante if needed}
+        \PY{n}{find\PYZus{}count} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{?count=([0\PYZhy{}9]+)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{response}\PY{o}{.}\PY{n}{url}\PY{p}{)}
+        \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{find\PYZus{}count}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+            \PY{n}{count} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{find\PYZus{}count}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{k}{if}\PY{p}{(}\PY{n}{count} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{max\PYZus{}reddit\PYZus{}count}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}now the parse function would return before anything would have been yielded}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{return}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Threads of this Page are:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{thread} \PY{o+ow}{in} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a.comments::attr(href)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}yield response.follow(thread, callback=self.parse\PYZus{}comments)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{thread}\PY{p}{)}
+        
+        \PY{n}{next\PYZus{}page} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{span.next\PYZhy{}button \PYZgt{} a::attr(href)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The link to the next page is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{if} \PY{n}{next\PYZus{}page} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}yield response.follow(next\PYZus{}page, callback=self.parse,headers=\PYZob{} \PYZdq{}user\PYZhy{}agent\PYZdq{}: self.user\PYZus{}agent \PYZcb{})}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{next\PYZus{}page}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Threads of this Page are:
+https://www.reddit.com/r/DotA2/comments/8hfa9f/epicenter\_xl\_grand\_finals/
+https://www.reddit.com/r/DotA2/comments/8hhkpb/competitive\_meta\_trends\_epicenter\_xl/
+https://www.reddit.com/r/DotA2/comments/8hh6s1/redeye\_officially\_joins\_the\_reddit\_community/
+https://www.reddit.com/r/DotA2/comments/8hh7bn/epicenter\_hiring\_noobfromua\_was\_a\_godsend/
+https://www.reddit.com/r/DotA2/comments/8hh81k/thanks\_epicenter\_for\_the\_fantastic\_major/
+https://www.reddit.com/r/DotA2/comments/8hl927/feel\_old/
+https://www.reddit.com/r/DotA2/comments/8hecpq/mr\_gaben\_i\_dont\_feel\_2gd/
+https://www.reddit.com/r/DotA2/comments/8hh3jk/congratulations\_to\_the\_winners\_of\_epicenter\_xl/
+https://www.reddit.com/r/DotA2/comments/8hio6h/for\_a\_second\_i\_swore\_batrider\_had\_a\_bubble\_butt/
+https://www.reddit.com/r/DotA2/comments/8hfq0u/morphling\_cant\_defend\_this/
+https://www.reddit.com/r/DotA2/comments/8hjd8u/bristleback\_rework\_ideas/
+https://www.reddit.com/r/DotA2/comments/8hks44/lategame\_bristle/
+https://www.reddit.com/r/DotA2/comments/8hji6m/bsj\_coaching\_session\_went\_wrong/
+https://www.reddit.com/r/DotA2/comments/8hkwkb/dota\_summit\_confirmed\_july\_2018/
+https://www.reddit.com/r/DotA2/comments/8hgsjs/high\_quality\_memes\_from\_the\_crowd/
+https://www.reddit.com/r/DotA2/comments/8hfs6i/bulldog\_shirt\_pool/
+https://www.reddit.com/r/DotA2/comments/8hg3fq/miracle\_with\_20\_min\_rampage/
+https://www.reddit.com/r/DotA2/comments/8hfn3u/navi\_top\_1\_cis\_confirmed/
+https://www.reddit.com/r/DotA2/comments/8hhc9r/thank\_you\_redeye/
+https://www.reddit.com/r/DotA2/comments/8hh9u8/where\_is\_the\_ti8\_compendium/
+https://www.reddit.com/r/DotA2/comments/8hgntv/chalice\_rngesus\_summon/
+https://www.reddit.com/r/DotA2/comments/8hecsg/this\_dam\_supports/
+https://www.reddit.com/r/DotA2/comments/8hgy23/plz\_let\_us\_disable\_the\_autocast\_on\_phantom/
+https://www.reddit.com/r/DotA2/comments/8hh403/dpc\_ranking\_epicenter\_xl\_5th\_may\_2018/
+https://www.reddit.com/r/DotA2/comments/8hg38k/the\_chappie/
+https://www.reddit.com/r/DotA2/comments/8hgt18/no\_titties/
+https://www.reddit.com/r/DotA2/comments/8hkkbz/im\_a\_little\_hungoverso\_i\_painted\_dark\_seer/
+The link to the next page is:
+https://www.reddit.com/r/DotA2/?count=25\&after=t3\_8hkkbz
+
+    \end{Verbatim}
+
+    \subsubsection{parse\_comments}\label{parse_comments}
+
+Zu beachten ist, das höchstwahrscheinlich in der Ausgabe alle "Scores"
+gleich 0 sind, dies kann an zwei Punkten liegen: - Die Kommentare sind
+sehr neu, und es hat noch niemand den Kommentar bewertet - Manche
+Subredits erlauben das Bewerten erst 180 Minuten nach Erstellung
+
+Um den Output zu minimieren werden nur die ersten 5 Kommentare
+betrachtet.
+
+Ein weiterer Punkt ist, dass oftmals Unicode-Characters enthalten sind,
+diese werden einfach entfernt.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{response} \PY{o}{=} \PY{n}{gen\PYZus{}scrapy\PYZus{}response}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a.comments::attr(href)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{title} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a.title::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+        \PY{n}{game} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://www.reddit.com/r/([a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9\PYZus{}\PYZhy{}]+)/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{response}\PY{o}{.}\PY{n}{url}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{k}{for} \PY{n}{comment} \PY{o+ow}{in} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.comment}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{:}
+            \PY{n}{user} \PY{o}{=} \PY{n}{comment}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.entry \PYZgt{} p.tagline \PYZgt{} a.author::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+            \PY{n}{user\PYZus{}link} \PY{o}{=} \PY{n}{comment}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.entry \PYZgt{} p.tagline \PYZgt{} a.author::attr(href)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}yield response.follow(userLink, callback=self.parse\PYZus{}user,headers=\PYZob{} \PYZdq{}user\PYZhy{}agent\PYZdq{}: self.user\PYZus{}agent \PYZcb{})}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{user\PYZus{}link}\PY{p}{)}
+        
+            \PY{n}{points} \PY{o}{=} \PY{n}{comment}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{span.score::attr(title)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+            \PY{k}{if}\PY{p}{(}\PY{o+ow}{not} \PY{n}{points}\PY{p}{)}\PY{p}{:}
+                \PY{n}{points} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}
+            \PY{n}{points} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+            \PY{n}{full\PYZus{}comment} \PY{o}{=} \PY{n}{comment}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.usertext\PYZhy{}body \PYZgt{} div.md}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{text} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{full\PYZus{}comment}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{text}\PY{p}{)}
+            \PY{n}{text} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{u[a\PYZhy{}zA\PYZhy{}Z0\PYZhy{}9]}\PY{l+s+si}{\PYZob{}4\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{text}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}yield dict(game=game,score=points,thread=title,user=user,content=text,table\PYZus{}type=\PYZsq{}comments\PYZsq{})}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{game}\PY{o}{=}\PY{n}{game}\PY{p}{,}\PY{n}{score}\PY{o}{=}\PY{n}{points}\PY{p}{,}\PY{n}{thread}\PY{o}{=}\PY{n}{title}\PY{p}{,}\PY{n}{user}\PY{o}{=}\PY{n}{user}\PY{p}{,}\PY{n}{content}\PY{o}{=}\PY{n}{text}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+https://www.reddit.com/user/BABA\_yaaGa
+\{'game': 'DotA2', 'score': 2, 'thread': 'Epicenter XL - Grand Finals', 'user': 'BABA\_yaaGa', 'content': 'Well played, both TL and LGD. The former may keep losing their form due to unfriendly patches? Its the Chinese year anyway. '\}
+https://www.reddit.com/user/Noctis\_777
+\{'game': 'DotA2', 'score': 2, 'thread': 'Epicenter XL - Grand Finals', 'user': 'Noctis\_777', 'content': 'Have the lost their form though? Second place at a Major with zero loses outside of the eventual winner. Game 1 and 3 of the GF were incredibly close too. Think they did just fine.'\}
+https://www.reddit.com/user/TheAlmightyMeow
+\{'game': 'DotA2', 'score': 0, 'thread': 'Epicenter XL - Grand Finals', 'user': 'TheAlmightyMeow', 'content': 'LGD* game 1 top lane highground and game 3 bottom lane highground. I think LGD highground is a thing back then lul. Now Liquid doing it out of respect.'\}
+https://www.reddit.com/user/karnickelpower
+\{'game': 'DotA2', 'score': 0, 'thread': 'Epicenter XL - Grand Finals', 'user': 'karnickelpower', 'content': 'What does this one want to say?'\}
+https://www.reddit.com/user/TheAlmightyMeow
+\{'game': 'DotA2', 'score': 0, 'thread': 'Epicenter XL - Grand Finals', 'user': 'TheAlmightyMeow', 'content': 'Nothing important really. Just that liquid lose 2 games because of their overextend at lgd highground. '\}
+
+    \end{Verbatim}
+
+    \subsubsection{parse\_user}\label{parse_user}
+
+User-Pages sind nicht so konsistent gestaltet. Es gibt zwei verscheidene
+Designs und Strukturen der Seiten: Neu:
+\href{https://www.reddit.com/user/dluminous}{dluminous} Alt:
+\href{https://www.reddit.com/user/babuks2006}{babuks2006} Außerdem gibt
+es gesperrte user (wird von scrapy gefangen, da Reddit einen HTTP-403
+Statuscode sendet) und "+18" accounts
+(\href{https://www.reddit.com/over18?dest=/user/catsalways}{catsalways})
+welche einfach ignoriert werden.
+
+Das nicht alle Benutzer erfasst werden muss in der Analyse
+berücksichtigt werden.
+
+Zudem soll das "Reddit-alter" gespeichert werden, dafür wird ein String
+aus dem Dokument mithilfe von \emph{datetime} verarbeitet.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+        
+        \PY{n}{response} \PY{o}{=} \PY{n}{gen\PYZus{}scrapy\PYZus{}response}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://www.reddit.com/user/dluminous}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}response = gen\PYZus{}scrapy\PYZus{}response(\PYZdq{}https://www.reddit.com/user/babuks2006\PYZdq{})}
+        
+        \PY{n}{findname} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a.ProfileSidebar\PYZus{}\PYZus{}nameTitleLink::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+        \PY{k}{if}\PY{p}{(}\PY{n}{findname}\PY{p}{)}\PY{p}{:}
+            \PY{n}{name} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u/(.*)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{findname}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{birthday} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.UserSpecialsListSidebar \PYZgt{} div \PYZgt{} ul \PYZgt{} li \PYZgt{} span.UserSpecialsListSidebar\PYZus{}\PYZus{}date::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+            \PY{n}{birthday} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{birthday}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{B }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{, }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+            \PY{n}{karma} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[., ]|Karma}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.ProfileSidebar\PYZus{}\PYZus{}counters \PYZgt{} span \PYZgt{}span::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}yield dict(name=name,birthday=birthday,karma = karma,table\PYZus{}type=\PYZsq{}users\PYZsq{})}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{n}{name}\PY{p}{,}\PY{n}{birthday}\PY{o}{=}\PY{n}{birthday}\PY{p}{,}\PY{n}{karma} \PY{o}{=} \PY{n}{karma}\PY{p}{)}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{name} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{div.titlebox \PYZgt{} h1::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+            \PY{k}{if}\PY{p}{(} \PY{o+ow}{not} \PY{n}{name}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}return \PYZsh{}ignore this user, this can occur due to +18 rating of the user}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{return}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{birthday} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{span.age \PYZgt{} time::attr(datetime)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}
+            \PY{n}{birthday} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{birthday}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{H:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{M:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{S+00:00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+            \PY{n}{karma\PYZus{}post} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{span.karma::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{karma\PYZus{}comment} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{span.comment\PYZhy{}karma::text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract\PYZus{}first}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}yield dict(name=name,birthday=birthday,karma = karma\PYZus{}post + karma\PYZus{}comment,table\PYZus{}type=\PYZsq{}users\PYZsq{})}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{n}{name}\PY{p}{,}\PY{n}{birthday}\PY{o}{=}\PY{n}{birthday}\PY{p}{,}\PY{n}{karma} \PY{o}{=} \PY{n}{karma\PYZus{}post} \PY{o}{+} \PY{n}{karma\PYZus{}comment}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'name': 'dluminous', 'birthday': '2013-02-21 00:00:00', 'karma': 47621\}
+
+    \end{Verbatim}
+
+    Alle Daten wurden über den Spider in .jl Files gespeichert, diese sind
+für den Nächsten abstand erforderlich.
+
+    \subsection{Datenbank}\label{datenbank}
+
+Für die weitere Analyse werden die Daten in einer SQL-Lite Datenbank
+gespeichert.
+
+Hierfür werden zunächst die Dateien \emph{users.jl} und
+\emph{comments.jl} ausgelesen:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{json}
+        
+        \PY{n}{users\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{resources/users.jl}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{users} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{users\PYZus{}file}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{file}\PY{p}{:}
+                \PY{n}{item} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+                \PY{n}{users}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+                
+        \PY{n}{comments\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{resources/comments.jl}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{comments} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{comments\PYZus{}file}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{file}\PY{p}{:}
+                \PY{n}{item} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+                \PY{n}{comments}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+\end{Verbatim}
+
+
+    Nun sollten die Daten in python benutzbar sein:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{comments}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{comments}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{users}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{users}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'game': 'aoe4', 'score': 33, 'thread': 'Age of Empires IV announcement trailer removed from YouTube', 'user': 'Ponymaricon', 'content': 'Keep calm.'\}
+39772
+\{'name': 'Dannflor', 'birthday': '2013-05-14 01:20:02', 'karma': 27460, 'profile\_type': 'old'\}
+22782
+
+    \end{Verbatim}
+
+    Nun können die Daten in eine Sqlite Datenbank übernommen werden:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{sqlite3}
+        
+        \PY{n}{database}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{resources/reddit.sqlite}\PY{l+s+s2}{\PYZdq{}}
+        \PY{c+c1}{\PYZsh{}Hilfsfunktion von Blatt 06}
+        \PY{k}{def} \PY{n+nf}{sql\PYZus{}execute}\PY{p}{(}\PY{n}{database}\PY{p}{,} \PY{n}{sql}\PY{p}{)}\PY{p}{:}
+            \PY{k}{with} \PY{n}{sqlite3}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{n}{database}\PY{p}{)} \PY{k}{as} \PY{n}{con}\PY{p}{:}
+                \PY{n}{cur} \PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{cursor}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} damit man sieht, was passiert}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Executing in }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{database}\PY{p}{,} \PY{n}{sql}\PY{p}{)}\PY{p}{)}
+                \PY{n}{cur}\PY{o}{.}\PY{n}{execute}\PY{p}{(}\PY{n}{sql}\PY{p}{)}
+                \PY{k}{if} \PY{n}{cur}\PY{o}{.}\PY{n}{rowcount} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{cur}\PY{o}{.}\PY{n}{rowcount}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ rows affected.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZgt{} OK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}clearing Database if needed:}
+         \PY{k}{if}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sql\PYZus{}execute}\PY{p}{(}\PY{n}{database}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DROP TABLE users}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{sql\PYZus{}execute}\PY{p}{(}\PY{n}{database}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DROP TABLE comments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             
+         
+         \PY{c+c1}{\PYZsh{}creating Tables:}
+         \PY{n}{sql\PYZus{}execute}\PY{p}{(}\PY{n}{database}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CREATE TABLE IF NOT EXISTS users (name TEXT,birthday TEXT,karma INTEGER)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{sql\PYZus{}execute}\PY{p}{(}\PY{n}{database}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CREATE TABLE IF NOT EXISTS comments (game TEXT,score Integer,thread TEXT,content TEXT,user TEXT)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         
+         \PY{c+c1}{\PYZsh{}copying data reused function from sheet 06:}
+         \PY{k}{with} \PY{n}{sqlite3}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{n}{database}\PY{p}{)} \PY{k}{as} \PY{n}{con}\PY{p}{:}
+             \PY{n}{cur} \PY{o}{=} \PY{n}{con}\PY{o}{.}\PY{n}{cursor}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{cnt} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{user} \PY{o+ow}{in} \PY{n}{users}\PY{p}{:}
+         
+                 \PY{n}{sql} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{INSERT INTO users (name,birthday,karma) VALUES (}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{birthday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{karma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n}{cur}\PY{o}{.}\PY{n}{execute}\PY{p}{(}\PY{n}{sql}\PY{p}{)}
+                     \PY{n}{cnt} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EXCEPTION: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{e}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{sql}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{user}\PY{p}{)}
+                     \PY{k}{raise}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ records inserted into }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{cnt}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{users}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{cnt} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{comment} \PY{o+ow}{in} \PY{n}{comments}\PY{p}{:}
+         
+                 \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{comment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{content}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{sql} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{INSERT INTO comments (game,thread,content,score,user) VALUES (}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PYZbs{}
+                     \PY{p}{(}\PY{n}{comment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{game}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{comment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{thread}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{comment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{content}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{comment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{comment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{try}\PY{p}{:}
+                         \PY{n}{cur}\PY{o}{.}\PY{n}{execute}\PY{p}{(}\PY{n}{sql}\PY{p}{)}
+                         \PY{n}{cnt} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EXCEPTION: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{e}\PY{p}{)}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sql}\PY{p}{)}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{n}{user}\PY{p}{)}
+                         \PY{k}{raise}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ records inserted into }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{cnt}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{comments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Executing in resources/reddit.sqlite:
+DROP TABLE users
+--> OK
+Executing in resources/reddit.sqlite:
+DROP TABLE comments
+--> OK
+Executing in resources/reddit.sqlite:
+CREATE TABLE IF NOT EXISTS users (name TEXT,birthday TEXT,karma INTEGER)
+--> OK
+Executing in resources/reddit.sqlite:
+CREATE TABLE IF NOT EXISTS comments (game TEXT,score Integer,thread TEXT,content TEXT,user TEXT)
+--> OK
+22782 records inserted into users.
+39242 records inserted into comments.
+
+    \end{Verbatim}
+
+    \subsection{Exploration}\label{exploration}
+
+Nachdem alle Daten in die Datenkbank geschrieben wurden kann nun
+versucht werden, ein paar erste Erfahrungen mit den Daten zu machen.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} sql
+         \PY{o}{\PYZpc{}}\PY{k}{sql} sqlite:///resources/reddit.sqlite
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}IPython\textbackslash{}config.py:13: ShimWarning: The `IPython.config` package has been deprecated since IPython 4.0. You should import from traitlets.config instead.
+  "You should import from traitlets.config instead.", ShimWarning)
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sql\textbackslash{}magic.py:4: UserWarning: IPython.utils.traitlets has moved to a top-level traitlets package.
+  from IPython.utils.traitlets import Bool, Int, Unicode
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 'Connected: None@resources/reddit.sqlite'
+\end{Verbatim}
+            
+    Beispielsweise könnte man versuchen die beliebtesten Kommentare zu
+finden:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{o}{\PYZpc{}}\PY{k}{sql} SELECT * FROM comments ORDER BY score DESC LIMIT 5
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} [('FortNiteBR', 4481, 'A no skin transforms in front of my very eyes', 'He suddenly started shooting better when he changed to john wick lmao', 'robbyro5'),
+          ('FortNiteBR', 4426, 'A no skin transforms in front of my very eyes', "This is scary, John wick's are getting smarter, they use disguises now!!!", 'xSamushix'),
+          ('FortNiteBR', 3260, 'Port-a-Storm', 'This is gonna be on YouTube in a couple of minutes', 'bensalinas'),
+          ('PUBATTLEGROUNDS', 2827, "PLAYERUNKNOWN'S BATTLEGROUNDS :: PC 1.0 Update \#12", 'Weapon ammo is now counted as “loaded” when the magazine or bullet is inserted into the weapon, rather than when the animation finishes Finally. Looks like a great update.', 'Odinshrafn'),
+          ('FortNiteBR', 2590, 'Patch 4.0 Bug and Unannounced Changes Megathread', 'Explanation: Game lags when you die, just before your death, it will just freeze and a few seconds later you will be dead Evidence: None just yet but I can post later, If replicable, how: Mostly seems to happen in high traffic areas like Tilted Towers Platform: PS4', 'Sno\_Jon')]
+\end{Verbatim}
+            
+    Order die unbeliebtesten:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{o}{\PYZpc{}}\PY{k}{sql} SELECT * FROM comments ORDER BY score ASC LIMIT 5
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} [('PUBATTLEGROUNDS', -436, "Now we have announcements about UPDATES in game. That's nice!", 'Nice', 'shaledigger1'),
+          ('PUBATTLEGROUNDS', -225, "Now we have announcements about UPDATES in game. That's nice!", 'Nicee..', 'Bettebo'),
+          ('FortNiteBR', -156, 'Can we please get a secret base behind this waterfall?', 'Too much going on around there as is imo', 'JaredWilson11'),
+          ('PUBATTLEGROUNDS', -125, "Now we have announcements about UPDATES in game. That's nice!", 'Congrats on doing something that live games have been able to do for over two decades.', 'Rednys'),
+          ('DotA2', -76, "Mr. Icefrog I don't feel so good.", 'Purge is useless. But time pass', 'nexusprime2015')]
+\end{Verbatim}
+            
+    An diesem Punkt könnte man bereits vergleichen wie hoch der
+durchschnittliche Karma-Score eines Kommentar eines Forum ist.
+
+Zur veranschaulichung wird \emph{matplotlib} verwendet.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{average\PYZus{}scores} \PY{o}{=} \PY{o}{\PYZpc{}}\PY{k}{sql} SELECT game,AVG(score) as avg\PYZus{}score FROM comments GROUP BY game ORDER BY avg\PYZus{}score DESC
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{c+c1}{\PYZsh{}Function from sheet06, modified}
+         \PY{k}{def} \PY{n+nf}{txa\PYZus{}plot}\PY{p}{(}\PY{n}{list\PYZus{}of\PYZus{}tuples}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{dx} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{dy}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{:} 
+         
+             \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{list\PYZus{}of\PYZus{}tuples}\PY{p}{]}
+             \PY{n}{values} \PY{o}{=} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{list\PYZus{}of\PYZus{}tuples}\PY{p}{]}
+             \PY{n}{dummy\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Erstellung des Balkendiagramms}
+             \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{dummy\PYZus{}pos}\PY{p}{,} \PY{n}{values}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{dummy\PYZus{}pos}\PY{p}{,} \PY{n}{labels}\PY{p}{,}  \PY{n}{rotation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vertical}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}displays the value of a bar above the bar}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{values}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{n}{dx}\PY{p}{,}\PY{n}{v} \PY{o}{+} \PY{n}{dy}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}.1f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{v}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{k}{if} \PY{n}{title}\PY{p}{:} 
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{txa\PYZus{}plot}\PY{p}{(}\PY{n}{average\PYZus{}scores}\PY{p}{,}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spiel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mittelwert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mittelwerte der Karma\PYZhy{}scores der einzelnen Kommentare nach Forum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Auffällig ist, das alte Spiele, und Spiele mit kleinen Fangemeinden
+schlechter Abschneiden. Man könnte versuchen die Relevanz zu erhöhen in
+dem man dies mit der Aktivität in den Foren gewichtet.
+
+Hierfür wäre es interessant zu wissen, wie viele Kommentare im Schnitt
+pro Thread erfasst wurden, zu beachten ist hierbei, dass zu tiefe
+Verschachtelungen von Kommentaren und antworten nicht mitgescrapt sind,
+da diese nur über Javascript aufruf bar sind.
+
+Zudem sollte man erwähnen, dass nicht nur kommentierende User
+existieren, es wird also die Annahme getroffen, dass die Kommentaranzahl
+linear propertional zur Gesamtaktivität ist.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{average\PYZus{}comments} \PY{o}{=} \PY{o}{\PYZpc{}}\PY{k}{sql} SELECT game,AVG(count) as avg FROM (SELECT COUNT(*) as count,game FROM comments GROUP BY thread) GROUP BY game ORDER BY avg DESC
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{txa\PYZus{}plot}\PY{p}{(}\PY{n}{average\PYZus{}comments}\PY{p}{,}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spiel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mittelwert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mittelwerte der Aktivität pro Thread pro Spiel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{average\PYZus{}score\PYZus{}by\PYZus{}activity} \PY{o}{=} \PY{o}{\PYZpc{}}\PY{k}{sql} SELECT avgs.game,avg\PYZus{}score/avg\PYZus{}count as avg,avg\PYZus{}score,avg\PYZus{}count from (SELECT game,AVG(score) as avg\PYZus{}score FROM comments GROUP BY game) as avgs JOIN (SELECT game,AVG(count) as avg\PYZus{}count FROM (SELECT COUNT(*) as count,game FROM comments GROUP BY thread) GROUP BY game) as avgc  ON avgc.game = avgs.game ORDER BY avg DESC
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{txa\PYZus{}plot}\PY{p}{(}\PY{n}{average\PYZus{}score\PYZus{}by\PYZus{}activity}\PY{p}{,}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spiel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mittelwert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mittelwert der Scores/Mittelwert der Kommentaranzahl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{dx}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{33}\PY{p}{,}\PY{n}{dy}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{average\PYZus{}score\PYZus{}by\PYZus{}activity}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} [('GodofWar', 1.115662930951058, 39.6266944734098, 35.51851851851852),
+          ('Breath\_of\_the\_Wild', 0.915235935644099, 15.523809523809524, 16.96153846153846),
+          ('civ', 0.8914676375057125, 18.852889667250437, 21.14814814814815),
+          ('smashbros', 0.6080225193525686, 18.285714285714285, 30.074074074074073),
+          ('pokemon', 0.5879806945810259, 12.573741007194245, 21.384615384615383),
+          ('Kirby', 0.5823865745897379, 5.08955223880597, 8.73913043478261),
+          ('mariokart', 0.4733727810650888, 3.076923076923077, 6.5),
+          ('assassinscreed', 0.45489526191126095, 5.896142433234421, 12.961538461538462),
+          ('Terraria', 0.44186236440986276, 6.237057220708447, 14.115384615384615),
+          ('Witcher3', 0.43948216405675844, 2.5413533834586466, 5.782608695652174),
+          ('tf2', 0.42732380551883853, 14.418221734357848, 33.74074074074074),
+          ('Minecraft', 0.3825688833480621, 10.088483146067416, 26.37037037037037),
+          ('hearthstone', 0.37322780627965163, 25.36566757493188, 67.96296296296296),
+          ('starcraft', 0.36721881680231616, 7.782214156079855, 21.192307692307693),
+          ('halo', 0.3656330578512397, 7.734545454545454, 21.153846153846153),
+          ('skyrim', 0.3000810174153402, 12.511070110701107, 41.69230769230769),
+          ('battlefield\_one', 0.2887571578764711, 6.694888178913738, 23.185185185185187),
+          ('Mario', 0.2790855590765052, 1.4574468085106382, 5.222222222222222),
+          ('farcry', 0.2776766659583707, 7.027355623100304, 25.307692307692307),
+          ('FortNiteBR', 0.2688285448180844, 30.248189598420012, 112.51851851851852),
+          ('Wolfenstein', 0.2639248863025087, 1.7972027972027973, 6.809523809523809),
+          ('CallOfDuty', 0.2363288573720459, 4.172113289760349, 17.653846153846153),
+          ('darksouls3', 0.23226562499999998, 4.129166666666666, 17.77777777777778),
+          ('RocketLeague', 0.23157121541278333, 7.650756693830035, 33.03846153846154),
+          ('PUBATTLEGROUNDS', 0.22014167892711634, 18.394060283687942, 83.55555555555556),
+          ('silenthill', 0.2187825182101977, 2.7129032258064516, 12.4),
+          ('WorldofTanks', 0.21581640504770697, 3.7850877192982457, 17.53846153846154),
+          ('granturismo', 0.21482860718537283, 1.6906077348066297, 7.869565217391305),
+          ('forza', 0.20987603305785124, 3.8477272727272727, 18.333333333333332),
+          ('GlobalOffensive', 0.19586031510441773, 16.73852385238524, 85.46153846153847),
+          ('wow', 0.19446159934328125, 19.006820765441454, 97.74074074074075),
+          ('unrealtournament', 0.1932638888888889, 2.1083333333333334, 10.909090909090908),
+          ('HeroesofNewerth', 0.1784437644771083, 1.3903743315508021, 7.791666666666667),
+          ('aoe4', 0.14804808561466942, 4.169034090909091, 28.16),
+          ('Tekken', 0.1447855029585799, 3.764423076923077, 26.0),
+          ('FIFA', 0.14436734031328627, 6.40990990990991, 44.4),
+          ('heroesofthestorm', 0.13830041847012622, 7.84056987788331, 56.69230769230769),
+          ('leagueoflegends', 0.1367248254569067, 17.453449834287436, 127.65384615384616),
+          ('Tetris', 0.1321499013806706, 0.8589743589743589, 6.5),
+          ('DotA2', 0.10020698673434585, 9.475127301214258, 94.55555555555556),
+          ('gtaonline', 0.09879575155601307, 2.8028720626631856, 28.37037037037037),
+          ('Smite', 0.06004137030047903, 2.214859437751004, 36.888888888888886),
+          ('Guildwars2', 0.05397160619575604, 3.186323713927227, 59.03703703703704),
+          ('StreetFighter', 0.02658404588842511, 0.6295585412667947, 23.681818181818183)]
+\end{Verbatim}
+            
+    Als letztes wäre noch interessant zu wissen, wie lang die einzelnen
+Kommentare im Schnitt sind. Eventuell haben länge Kommentare im Schnitt
+einen höheren Score. Es wird versucht dies herauszufinden.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{comments} \PY{o}{=} \PY{o}{\PYZpc{}}\PY{k}{sql} select content,score from comments
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{comments\PYZus{}words\PYZus{}score} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{comments}\PY{p}{]} \PY{c+c1}{\PYZsh{} wörter}
+         \PY{c+c1}{\PYZsh{}comments\PYZus{}words\PYZus{}score = [(len(x[0]),x[1]) for x in comments] \PYZsh{}Zeichen}
+         \PY{c+c1}{\PYZsh{}comments\PYZus{}words\PYZus{}score = [(len(re.split(r\PYZsq{} \PYZsq{},x[0])),x[1]) for x in comments if x[1]\PYZlt{}1000 and x[1] \PYZgt{} 0] \PYZsh{} wörter, etwas geglättet}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{comments\PYZus{}words\PYZus{}score}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{comments\PYZus{}words\PYZus{}score}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Länge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores nach Kommentarlänge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} Text(0.5,1,'Scores nach Kommentarlänge')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Als Maß für den Zusammenhang könnte man Pearson hernehmen (gilt nur bei
+linearem Zusammenhang).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k}{def} \PY{n+nf}{calc\PYZus{}pearson}\PY{p}{(}\PY{n}{list\PYZus{}of\PYZus{}coordinates}\PY{p}{)}\PY{p}{:}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{list\PYZus{}of\PYZus{}coordinates}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}mean values}
+             \PY{n}{mx} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{n}{my} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{k}{for} \PY{n}{el} \PY{o+ow}{in} \PY{n}{list\PYZus{}of\PYZus{}coordinates}\PY{p}{:}
+                 \PY{n}{mx} \PY{o}{+}\PY{o}{=} \PY{n}{el}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{my} \PY{o}{+}\PY{o}{=} \PY{n}{el}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{mx} \PY{o}{/}\PY{o}{=} \PY{n}{n}
+             \PY{n}{my} \PY{o}{/}\PY{o}{=} \PY{n}{n}
+             
+             \PY{c+c1}{\PYZsh{}calculate variances and covariance}
+             \PY{n}{varx} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{n}{vary} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{n}{cov} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{k}{for} \PY{n}{el} \PY{o+ow}{in} \PY{n}{list\PYZus{}of\PYZus{}coordinates}\PY{p}{:}
+                 \PY{n}{cov} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{el}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{mx}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{el}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{my}\PY{p}{)}
+                 \PY{n}{varx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{el}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{mx}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                 \PY{n}{vary} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{el}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{my}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n}{cov} \PY{o}{/}\PY{o}{=}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{varx} \PY{o}{/}\PY{o}{=}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{vary} \PY{o}{/}\PY{o}{=}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{sx} \PY{o}{=} \PY{n}{varx}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{sy} \PY{o}{=} \PY{n}{vary}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{pearson} \PY{o}{=} \PY{n}{cov}\PY{o}{/}\PY{p}{(}\PY{n}{sx}\PY{o}{*}\PY{n}{sy}\PY{p}{)}
+             \PY{k}{return} \PY{n}{pearson}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{calc\PYZus{}pearson}\PY{p}{(}\PY{n}{comments\PYZus{}words\PYZus{}score}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.005836738655486697
+
+    \end{Verbatim}
+
+    Offenbar besteht jedoch kein (linearer) Zusammenhang zwischen Länge
+eines Kommentar und dessen Score. Grund dafür könnten die kurzen
+Kommentare mit extrem hohen scores sein.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
